@@ -2,7 +2,7 @@
 
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-postgres_local_base = 'postgresql://{}:@localhost/'.format(os.getenv('POSTGRES_USER', 'postgres'))
+postgres_local_base = 'postgresql://laurahughes:@localhost/'
 database_name = 'repurpos_db'
 
 
