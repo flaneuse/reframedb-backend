@@ -238,8 +238,8 @@ def get_dotplot_data(aid):
     filtered = filtered.loc[filtered['assay_type'] != 'unknown'] # remove weird data modes
 
     filtered['url'] = filtered[['ikey', 'wikidata']].apply(
-        lambda x: '/#/compound_data/{}'.format(x['ikey'])
-        if pd.isnull(x['wikidata']) else '/#/compound_data/{};qid={}'.format(x['ikey'], x['wikidata']), axis=1)
+        lambda x: '/compound_data/{}'.format(x['ikey'])
+        if pd.isnull(x['wikidata']) else '/compound_data/{};qid={}'.format(x['ikey'], x['wikidata']), axis=1)
 
     filtered['main_label'] = filtered.apply(find_name, axis=1)
 
