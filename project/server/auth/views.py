@@ -230,7 +230,6 @@ def get_dotplot_data(aid):
         else:
             return row.pubchem_label
 
-    assay_data = []
     # filter out data: selected assay, valid AC50 value
     filtered = plot_data.copy()[(plot_data['id'] == aid) & (plot_data['ac50'])]
 
@@ -252,21 +251,9 @@ def get_dotplot_data(aid):
 
     # convert to the proper json-able structure
     for idx, cmpd in filtered.iterrows():
-        temp = {
-            'assay_title': cmpd.assay_title,
-            'calibr_id': cmpd.calibr_id,
-            'name': cmpd.main_label,
-            'ac50': cmpd.ac50,
-            'assay_type': cmpd.assay_type,
-            'efficacy': cmpd.efficacy,
-            'r_sq': cmpd.rsquared,
-            'pubchem_id': cmpd['PubChem CID'] if pd.notnull(cmpd['PubChem CID']) else '',
-            'url': cmpd.url
-        }
+            cmpd['pubchem_id']: cmpd['PubChem CID'] if pd.notnull(cmpd['PubChem CID']) else '',
 
-        assay_data.append(temp)
-
-    return assay_data
+    return filtered
 
 
 class RegisterAPI(MethodView):
